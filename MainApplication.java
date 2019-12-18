@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
-public class Start extends Frame implements ActionListener {
+public class MainApplication extends Frame implements ActionListener {
 	private static final long serialVersionUID = 0L;
 	private TextField server;
 	private String host;
@@ -10,7 +10,7 @@ public class Start extends Frame implements ActionListener {
 	private Button c, start, stop;
 	private Server s = null;
 
-	public Start() {
+	public MainApplication() {
 		super("Tic-Tac-Toe");
 		setLayout(new GridLayout(0,2));
 
@@ -77,6 +77,6 @@ public class Start extends Frame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new Start();
+		new MainApplication();
 	}
 }
