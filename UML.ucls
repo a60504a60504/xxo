@@ -10,15 +10,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="Start" project="xxo" file="/xxo/Start.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="268" width="223" x="544" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="MessageBox" project="xxo" file="/xxo/MessageBox.java" binary="false" 
+  <class id="2" language="java" name="MessageBox" project="xxo" file="/xxo/MessageBox.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="124" width="223" x="523" y="763"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -27,7 +19,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="Protocol" project="xxo" file="/xxo/Protocol.java" binary="false" 
+  <class id="3" language="java" name="Protocol" project="xxo" file="/xxo/Protocol.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="304" width="138" x="435" y="1343"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -36,7 +28,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="Client.Getter" project="xxo" file="/xxo/Client.java" binary="false" 
+  <class id="4" language="java" name="Client.Getter" project="xxo" file="/xxo/Client.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="106" width="105" x="376" y="617"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -45,7 +37,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="Server" project="xxo" file="/xxo/Server.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="Server" project="xxo" file="/xxo/Server.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="358" width="208" x="41" y="763"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -53,7 +45,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="Client" project="xxo" file="/xxo/Client.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="Client" project="xxo" file="/xxo/Client.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="232" width="153" x="370" y="345"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -61,7 +53,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="8" language="java" name="Server.States" project="xxo" file="/xxo/Server.java" binary="false" 
+  <enumeration id="7" language="java" name="Server.States" project="xxo" file="/xxo/Server.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="142" width="144" x="270" y="1161"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -70,7 +62,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="9" language="java" name="Server.Client" project="xxo" file="/xxo/Server.java" binary="false" 
+  <class id="8" language="java" name="Server.Client" project="xxo" file="/xxo/Server.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="124" width="108" x="101" y="1161"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -79,119 +71,91 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="10">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <dependency id="11">    
+  <dependency id="9">    
     <bendpoint x="511" y="617"/>    
     <bendpoint x="492" y="763"/>    
     <bendpoint x="492" y="1161"/>    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
   </dependency>  
-  <nesting id="12">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="9"/>  
-  </nesting>  
-  <nesting id="13">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="8"/>  
-  </nesting>  
-  <association id="14">    
-    <bendpoint x="71" y="617"/>    
-    <bendpoint x="279" y="763"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="15" name="grid"/>      
-      <multiplicity id="16" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="17">    
-    <bendpoint x="239" y="1161"/>    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <association id="18">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="19" name="get"/>      
-      <multiplicity id="20" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="21">    
-    <bendpoint x="332" y="763"/>    
+  <nesting id="10">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <nesting id="11">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <association id="12">    
+    <bendpoint x="71" y="617"/>    
+    <bendpoint x="279" y="763"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="13" name="grid"/>      
+      <multiplicity id="14" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="15">    
+    <bendpoint x="239" y="1161"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
   </dependency>  
-  <nesting id="22">    
-    <end type="SOURCE" refId="7"/>    
+  <association id="16">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="17" name="get"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="19">    
+    <bendpoint x="332" y="763"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <nesting id="20">    
+    <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="1"/>  
   </nesting>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="22">    
+    <bendpoint x="444" y="763"/>    
+    <bendpoint x="444" y="1161"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
   <dependency id="23">    
-    <bendpoint x="553" y="345"/>    
-    <bendpoint x="553" y="617"/>    
-    <end type="SOURCE" refId="2"/>    
+    <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
   <dependency id="24">    
-    <bendpoint x="776" y="345"/>    
-    <bendpoint x="776" y="617"/>    
-    <bendpoint x="776" y="763"/>    
-    <bendpoint x="776" y="1161"/>    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <association id="25">    
-    <bendpoint x="50" y="345"/>    
-    <bendpoint x="50" y="617"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="26" name="s"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="28">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <dependency id="29">    
-    <bendpoint x="444" y="763"/>    
-    <bendpoint x="444" y="1161"/>    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <dependency id="30">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <dependency id="31">    
     <bendpoint x="532" y="617"/>    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="3"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="32">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <nesting id="33">    
-    <end type="SOURCE" refId="7"/>    
+  <dependency id="25">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="5"/>  
-  </nesting>  
-  <dependency id="34">    
-    <bendpoint x="345" y="617"/>    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="6"/>  
   </dependency>  
-  <association id="35">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="36" name="grid"/>      
-      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
+  <nesting id="26">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <dependency id="27">    
+    <bendpoint x="345" y="617"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <association id="28">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="29" name="grid"/>      
+      <multiplicity id="30" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
