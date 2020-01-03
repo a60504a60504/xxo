@@ -1,17 +1,19 @@
 /* Protocol:
- * OOOOXXYY
- *
- * O: Opcode
- *    0 = client to server to set field
- *    1 = server to client to set "X"
- *    2 = server to client to set "O"
- *    3 = server to client to indicate win
- *    4 = server to client to indicate loss
- *    5 = server to client to indicate tie
- *    6 = server to client to indicate new round
- *    7 = server to client to indicate failure
- * X: X coord
- * Y: Y coord
+ * 
+ * input: 8-bits 
+ * 	  opcode: 4-bits
+ * 	       0 = client to server to set field
+ *    	   1 = server to client to set "X"
+ *         2 = server to client to set "O"
+ *         3 = server to client to indicate win
+ *         4 = server to client to indicate loss
+ *         5 = server to client to indicate tie
+ *         6 = server to client to indicate new round
+ *         7 = server to client to indicate failure
+ *    x: 2-bits X-coordinate
+ *    y: 2-bits Y-coordinate
+ * output: 
+ *     decode command and value of x and y
  */
 
 public class Protocol {
