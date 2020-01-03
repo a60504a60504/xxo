@@ -4,29 +4,29 @@ import java.io.IOException;
 
 public class MainApplication extends Frame implements ActionListener {
 	private static final long serialVersionUID = 0L;
-	private TextField server;
-	private String host;
-	private int port;
-	private Button c, start, stop;
-	private Server s = null;
+	private TextField hostURI;
+	private String hostIP;
+	private int hostPort;
+	private Button startClient, startServer, stopServer;
+	private Server server = null;
 
 	public MainApplication() {
 		super("Tic-Tac-Toe");
 		setLayout(new GridLayout(0,2));
 
-		c = new Button("Start Client");
-		c.addActionListener(this);
-		add(c);
+		startClient = new Button("Start Client");
+		startClient.addActionListener(this);
+		add(startClient);
 
-		server = new TextField("localhost:31137");
-		add(server);
+		hostURI = new TextField("localhost:31137");
+		add(hostURI);
 
-		start = new Button("Start Server");
-		start.addActionListener(this);
-		add(start);
-		stop = new Button("Stop Server");
-		stop.addActionListener(this);
-		add(stop);
+		startServer = new Button("Start Server");
+		startServer.addActionListener(this);
+		add(startServer);
+		stopServer = new Button("Stop Server");
+		stopServer.addActionListener(this);
+		add(stopServer);
 
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -41,38 +41,38 @@ public class MainApplication extends Frame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == c) {
+		if (e.getSource() == startClient) {
 			try {
 				parseHost();
-				new Client(host, port);
+				new Client(hostIP, hostPort);
 			} catch (IOException io) {
 				new MessageBox(getTitle(), "Error connecting to Server: " + io.getMessage());
 			}
-		} else if (e.getSource() == start) {
-			if (s != null)
-				s.interrupt();
+		} else if (e.getSource() == startServer) {
+			if (server != null)
+				server.interrupt();
 			parseHost();
-			s = new Server(port);
-			s.start();
-		} else if (e.getSource() == stop) {
-			if (s != null)
-				s.interrupt();
-			s = null;
+			server = new Server(hostPort);
+			server.start();
+		} else if (e.getSource() == stopServer) {
+			if (server != null)
+				server.interrupt();
+			server = null;
 		}
 	}
 
 	public void parseHost() {
-		String[] socket = server.getText().split(":");
-		host = socket[0];
+		String[] socket = hostURI.getText().split(":");
+		hostIP = socket[0];
 		if (socket.length > 1) {
 			try {
 				int port = Integer.parseInt(socket[1]);
-				this.port = (port >= 1024 && port < 0xFFFF) ? port : Protocol.DEFAULTPORT;
+				this.hostPort = (port >= 1024 && port < 0xFFFF) ? port : Protocol.DEFAULTPORT;
 			} catch (NumberFormatException e) {
-				this.port = Protocol.DEFAULTPORT;
+				this.hostPort = Protocol.DEFAULTPORT;
 			}
 		} else {
-			this.port = Protocol.DEFAULTPORT;
+			this.hostPort = Protocol.DEFAULTPORT;
 		}
 	}
 
