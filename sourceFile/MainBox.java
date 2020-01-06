@@ -1,14 +1,22 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Button;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.TextField;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-public class MainApplication extends Frame implements ActionListener {
+public class MainBox extends Frame implements ActionListener {
 	private static final long serialVersionUID = 0L;
 	private TextField hostURI;
 	private Button startClient, startServer, stopServer;
-	private Server server = null;
+	private ServerThread server = null;
 
-	public MainApplication() {
+	public MainBox() {
 		super("Tic-Tac-Toe");
 		setLayout(new GridLayout(0,2));
 
@@ -43,7 +51,7 @@ public class MainApplication extends Frame implements ActionListener {
 		if (e.getSource() == startClient) {
 			try {
 				objURI = Protocol.parseHost(hostURI);
-				new Client(objURI);
+				new ClientBox(objURI);
 			} catch (IOException io) {
 				new MessageBox(getTitle(), "Error connecting to Server: " + io.getMessage());
 			}
@@ -51,7 +59,7 @@ public class MainApplication extends Frame implements ActionListener {
 			if (server != null)
 				server.interrupt();
 			objURI = Protocol.parseHost(hostURI);
-			server = new Server(objURI);
+			server = new ServerThread(objURI);
 			server.start();
 		} else if (e.getSource() == stopServer) {
 			if (server != null)
@@ -61,6 +69,6 @@ public class MainApplication extends Frame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new MainApplication();
+		new MainBox();
 	}
 }

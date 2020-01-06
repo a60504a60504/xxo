@@ -1,10 +1,13 @@
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-public class Server extends Thread {
+public class ServerThread extends Thread {
 	private ServerSocket server;
-	private Socket client1, client2, last;
-	private boolean done = false;
+	Socket client1;
+	Socket client2;
+	private Socket last;
+	boolean done = false;
 	private int port;
 	private States[][] grid = new States[3][3];
 
@@ -20,7 +23,7 @@ public class Server extends Thread {
 		}
 	}
 
-	public Server(URI objURI) {
+	public ServerThread(URI objURI) {
 		this.port = objURI.getPort();
 	}
 	
@@ -63,8 +66,8 @@ public class Server extends Thread {
 				client2.getInputStream().skip(client2.getInputStream().available());
 			} catch (IOException e) {}
 
-			Client c1 = new Client(client1);
-			Client c2 = new Client(client2);
+			Communicate2Client c1 = new Communicate2Client(this, client1);
+			Communicate2Client c2 = new Communicate2Client(this, client2);
 			c1.start();
 			c2.start();
 			try {
@@ -96,7 +99,7 @@ public class Server extends Thread {
 		client2.getOutputStream().write(toclient2);
 	}
 
-	private synchronized void set(Socket client, int x, int y) throws IOException {
+	synchronized void set(Socket client, int x, int y) throws IOException {
 		if (grid[x][y] == States.NONE && x < grid.length && y < grid[0].length && client != last) {
 			byte b = 0;
 			if (client == client1) {
@@ -161,38 +164,12 @@ public class Server extends Thread {
 		System.err.println("Starting new round ...");
 	}
 
-	private synchronized void killclient(Socket client) {
+	synchronized void killclient(Socket client) {
 		if (client != null) {
 			try { client.getOutputStream().write(Protocol.FAIL << 4); } catch (IOException io) {}
 			try { client.close(); } catch (IOException io) {}
 		}
 		client = null;
-	}
-
-	private class Client extends Thread {
-		private Socket client;
-
-		public Client(Socket client) {
-			super("Client");
-			this.client = client;
-		}
-
-		@Override
-		public void run() {
-			while (!done) {
-				try {
-					int got = client.getInputStream().read();
-					if (got == -1/* || client == null*/)
-						throw new IOException();
-					if (Protocol.opcode(got) == Protocol.SET)
-						set(client, Protocol.x(got), Protocol.y(got));
-				} catch (IOException e) {
-					killclient(client1);
-					killclient(client2);
-					break;
-				}
-			}
-		}
 	}
 
 }
