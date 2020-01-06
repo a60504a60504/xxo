@@ -23,7 +23,70 @@ public class Server extends Thread {
 	public Server(URI objURI) {
 		this.port = objURI.getPort();
 	}
+	
+	@Override
+	public void run() {
+		while (!isInterrupted()) {
+			System.err.println("Server waiting for connections ...");
+			clearGrid(grid);
+			client1 = client2 = null;
+			try {
+				server = new ServerSocket(port);
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+				break;
+			}
+			while ((client1 == null || client2 == null) && !done) {
+				Socket client = null;
+				try {
+					client = server.accept();
+					if (client1 == null)
+						client1 = client;
+					else
+						client2 = client;
+					System.err.println("New connection from " + client.getInetAddress());
+				} catch (IOException e) {}
+			}
+			try {
+				server.close();
+			} catch (IOException e) {}
 
+			// pick the beginner
+			last = (Math.random() >= 0.5) ? client1 : client2;
+
+			if (done)
+				break;
+
+			// remove data which was already sent
+			try {
+				client1.getInputStream().skip(client1.getInputStream().available());
+				client2.getInputStream().skip(client2.getInputStream().available());
+			} catch (IOException e) {}
+
+			Client c1 = new Client(client1);
+			Client c2 = new Client(client2);
+			c1.start();
+			c2.start();
+			try {
+				c1.join();
+				c2.join();
+			} catch (InterruptedException e) { break; }
+		}
+	}
+
+	@Override
+	public void interrupt() {
+		super.interrupt();
+		done = true;
+		try {
+			if (server != null)
+				server.close();
+		} catch (IOException e) {}
+		killclient(client1);
+		killclient(client2);
+		System.err.println("Server terminated!");
+	}
+	
 	private void write(int tobothclients) throws IOException {
 		write(tobothclients, tobothclients);
 	}
@@ -96,69 +159,6 @@ public class Server extends Thread {
 		clearGrid(grid);
 		write(Protocol.NEWROUND << 4);
 		System.err.println("Starting new round ...");
-	}
-
-	@Override
-	public void run() {
-		while (!isInterrupted()) {
-			System.err.println("Server waiting for connections ...");
-			clearGrid(grid);
-			client1 = client2 = null;
-			try {
-				server = new ServerSocket(port);
-			} catch (IOException e) {
-				System.err.println(e.getMessage());
-				break;
-			}
-			while ((client1 == null || client2 == null) && !done) {
-				Socket client = null;
-				try {
-					client = server.accept();
-					if (client1 == null)
-						client1 = client;
-					else
-						client2 = client;
-					System.err.println("New connection from " + client.getInetAddress());
-				} catch (IOException e) {}
-			}
-			try {
-				server.close();
-			} catch (IOException e) {}
-
-			// pick the beginner
-			last = (Math.random() >= 0.5) ? client1 : client2;
-
-			if (done)
-				break;
-
-			// remove data which was already sent
-			try {
-				client1.getInputStream().skip(client1.getInputStream().available());
-				client2.getInputStream().skip(client2.getInputStream().available());
-			} catch (IOException e) {}
-
-			Client c1 = new Client(client1);
-			Client c2 = new Client(client2);
-			c1.start();
-			c2.start();
-			try {
-				c1.join();
-				c2.join();
-			} catch (InterruptedException e) { break; }
-		}
-	}
-
-	@Override
-	public void interrupt() {
-		super.interrupt();
-		done = true;
-		try {
-			if (server != null)
-				server.close();
-		} catch (IOException e) {}
-		killclient(client1);
-		killclient(client2);
-		System.err.println("Server terminated!");
 	}
 
 	private synchronized void killclient(Socket client) {

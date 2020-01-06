@@ -8,7 +8,7 @@ public final class Client extends Frame {
 	private Server.States[][] grid = new Server.States[3][3];
 	private Socket server;
 	private boolean done = false, won, tie = false;
-	private Getter get = new Getter();
+	private Communication get = new Communication();
 
 	public Client(URI objURI) throws UnknownHostException, IOException {
 		super("Tic-Tac-Toe");
@@ -40,18 +40,7 @@ public final class Client extends Frame {
 		Server.clearGrid(grid);
 		get.start();
 	}
-
-	private void set(int x, int y) {
-		try {
-			int b = (x&3) << 2;
-			b |= (y&3);
-			server.getOutputStream().write(b);
-		} catch (IOException e) {
-			new MessageBox(getTitle(), "Connection failed: " + e.getMessage());
-			setVisible(false);
-		}
-	}
-
+	
 	@Override
 	public void paint(Graphics g) {
 		g.drawLine(100, 0, 100, 300);
@@ -80,7 +69,18 @@ public final class Client extends Frame {
 		}
 	}
 
-	private class Getter extends Thread {
+	private void set(int x, int y) {
+		try {
+			int b = (x&3) << 2;
+			b |= (y&3);
+			server.getOutputStream().write(b);
+		} catch (IOException e) {
+			new MessageBox(getTitle(), "Connection failed: " + e.getMessage());
+			setVisible(false);
+		}
+	}
+
+	private class Communication extends Thread {
 		@Override
 		public void run() {
 			while (!isInterrupted()) {
