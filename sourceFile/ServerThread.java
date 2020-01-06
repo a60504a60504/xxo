@@ -3,11 +3,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerThread extends Thread {
+	protected Socket client1, client2, last;
+	protected boolean done = false;
 	private ServerSocket server;
-	Socket client1;
-	Socket client2;
-	private Socket last;
-	boolean done = false;
 	private int port;
 	private States[][] grid = new States[3][3];
 

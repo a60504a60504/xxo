@@ -3,14 +3,8 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 class Mouse extends MouseAdapter {
-	/**
-	 * 
-	 */
 	private ClientBox client;
 
-	/**
-	 * @param client
-	 */
 	Mouse(ClientBox client) {
 		this.client = client;
 	}
