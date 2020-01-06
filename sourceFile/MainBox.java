@@ -67,8 +67,4 @@ public class MainBox extends Frame implements ActionListener {
 			server = null;
 		}
 	}
-
-	public static void main(String[] args) {
-		new MainBox();
-	}
 }
