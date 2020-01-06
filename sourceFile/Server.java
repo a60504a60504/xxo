@@ -6,6 +6,7 @@ public class Server extends Thread {
 	private Socket client1, client2, last;
 	private boolean done = false;
 	private int port;
+	private States[][] grid = new States[3][3];
 
 	public enum States {
 		X, O, NONE
@@ -18,8 +19,6 @@ public class Server extends Thread {
 			}
 		}
 	}
-
-	private States[][] grid = new States[3][3];
 
 	public Server(URI objURI) {
 		this.port = objURI.getPort();
