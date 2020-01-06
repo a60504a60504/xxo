@@ -1,3 +1,5 @@
+import java.awt.TextField;
+
 /* Protocol:
  * 
  * input: 8-bits 
@@ -31,5 +33,23 @@ public class Protocol {
 
 	public static int y(int input) {
 		return input & 3;
+	}
+	
+	public static URI parseHost(TextField hostURI) {
+		String[] socket = hostURI.getText().split(":");
+		String hostIP = socket[0];
+		int hostPort;
+		
+		if (socket.length > 1) {
+			try {
+				int port = Integer.parseInt(socket[1]);
+				hostPort = (port >= 1024 && port < 0xFFFF) ? port : Protocol.DEFAULTPORT;
+			} catch (NumberFormatException e) {
+				hostPort = Protocol.DEFAULTPORT;
+			}
+		} else {
+			hostPort = Protocol.DEFAULTPORT;
+		}
+		return new URI(hostIP, hostPort);
 	}
 }

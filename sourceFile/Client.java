@@ -10,11 +10,7 @@ public final class Client extends Frame {
 	private boolean done = false, won, tie = false;
 	private Getter get = new Getter();
 
-	public Client(String server) throws UnknownHostException, IOException {
-		this(server, Protocol.DEFAULTPORT);
-	}
-
-	public Client(String server, int port) throws UnknownHostException, IOException {
+	public Client(URI objURI) throws UnknownHostException, IOException {
 		super("Tic-Tac-Toe");
 		setSize(300, 300);
 
@@ -23,7 +19,7 @@ public final class Client extends Frame {
 
 		setResizable(false);
 		try {
-			this.server = new Socket(server, port);
+			this.server = new Socket(objURI.getIP(), objURI.getPort());
 		} catch (IOException e) {
 			dispose();
 			throw e;

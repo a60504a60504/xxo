@@ -21,12 +21,8 @@ public class Server extends Thread {
 
 	private States[][] grid = new States[3][3];
 
-	public Server() {
-		this(Protocol.DEFAULTPORT);
-	}
-
-	public Server(int port) {
-		this.port = port;
+	public Server(URI objURI) {
+		this.port = objURI.getPort();
 	}
 
 	private void write(int tobothclients) throws IOException {
