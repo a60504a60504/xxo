@@ -11,51 +11,41 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class MainBox extends Frame implements ActionListener {
+	public TextField hostURI;
+	public Button startClient, startServer, stopServer;
+	public ServerThread server = null;
 	private static final long serialVersionUID = 0L;
-	private TextField hostURI;
-	private Button startClient, startServer, stopServer;
-	private ServerThread server = null;
+	private EventHandler event;
 
 	public MainBox() {
 		super("Tic-Tac-Toe");
-		createClientButton();
+		createButton(startClient,"Start Client");
+		createButton(startServer,"Start Server");
+		createButton(stopServer,"Start Server");
 		createUriTextfield();
-		createStartServerButton();
-		createStopServerButton();
 		createWindow();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startClient) {
-			startClientHandler();
+			this.event = new StartClientHandler();
 		} else if (e.getSource() == startServer) {
-			startServerHandler();
+			this.event = new StartServerHandler();
 		} else if (e.getSource() == stopServer) {
-			stopServerHandler();
+			this.event = new StopServerHandler();
 		}
+		event.createHandler(this);
 	}
 
-	private void createClientButton() {
-		startClient = new Button("Start Client");
-		startClient.addActionListener(this);
-		add(startClient);
+	private void createButton(Button btnName, String btnText) {
+		btnName = new Button(btnText);
+		btnName.addActionListener(this);
+		add(btnName);
 	}
 
 	private void createUriTextfield() {
 		hostURI = new TextField("localhost:31137");
 		add(hostURI);
-	}
-
-	private void createStartServerButton() {
-		startServer = new Button("Start Server");
-		startServer.addActionListener(this);
-		add(startServer);
-	}
-
-	private void createStopServerButton() {
-		stopServer = new Button("Stop Server");
-		stopServer.addActionListener(this);
-		add(stopServer);
 	}
 
 	private void createWindow() {
@@ -73,28 +63,28 @@ public class MainBox extends Frame implements ActionListener {
 		setVisible(true);
 	}
 
-	private void startClientHandler() {
-		URI objURI;
-		try {
-			objURI = Protocol.parseHost(hostURI);
-			new ClientBox(objURI);
-		} catch (IOException io) {
-			new MessageBox(getTitle(), "Error connecting to Server: " + io.getMessage());
-		}
-	}
-	
-	private void startServerHandler() {
-		URI objURI;
-		if (server != null)
-			server.interrupt();
-		objURI = Protocol.parseHost(hostURI);
-		server = new ServerThread(objURI);
-		server.start();
-	}
-	
-	private void stopServerHandler() {
-		if (server != null)
-			server.interrupt();
-		server = null;
-	}
+//	private void startClientHandler() {
+//		URI objURI;
+//		try {
+//			objURI = Protocol.parseHost(hostURI);
+//			new ClientBox(objURI);
+//		} catch (IOException io) {
+//			new MessageBox(getTitle(), "Error connecting to Server: " + io.getMessage());
+//		}
+//	}
+//	
+//	private void startServerHandler() {
+//		URI objURI;
+//		if (server != null)
+//			server.interrupt();
+//		objURI = Protocol.parseHost(hostURI);
+//		server = new ServerThread(objURI);
+//		server.start();
+//	}
+//	
+//	private void stopServerHandler() {
+//		if (server != null)
+//			server.interrupt();
+//		server = null;
+//	}
 }
